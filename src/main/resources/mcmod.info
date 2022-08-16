@@ -1,0 +1,18 @@
+[
+  {
+    "modid": "kinko",
+    "name": "Kinkomc",
+    "description": "A mod for the server Kinko mc",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "https://kinkomc.fr/",
+    "updateUrl": "",
+    "authorList": [
+      "Swokky"
+    ],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]
