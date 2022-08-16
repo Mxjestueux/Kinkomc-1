@@ -9,6 +9,18 @@ buildscript {
     }
 }
 
+plugins {
+
+    id 'wtf.gofancy.fancygradle' version '1.1.+'
+}
+
+fancyGradle {
+    patches {
+        resources
+    }
+}
+
+
 apply plugin: 'net.minecraftforge.gradle'
 
 group = 'kinko'
@@ -132,6 +144,3 @@ jar {
 }
 
 jar.finalizedBy('reobfJar')
-sourceSets {
-    main { output.resourcesDir = output.classesDirs.singleFile }
-}
