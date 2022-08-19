@@ -1,10 +1,15 @@
 package fr.swokky.kinko.proxy;
 
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
+import org.lwjgl.input.Keyboard;
 
 public class ClientProxy extends CommonProxy{
+
+    public static KeyBinding[] keyBindings;
 
     @Override
     public void registerItemRenderer(Item item, int meta) {
@@ -28,5 +33,18 @@ public class ClientProxy extends CommonProxy{
     @Override
     public void preInit() {
         super.preInit();
+    }
+
+    @Override
+    public void init() {
+
+        keyBindings = new KeyBinding[1];
+
+        keyBindings[0] = new KeyBinding("key.nomi.attack", Keyboard.KEY_H, "key.kinko.category");
+
+
+        for (KeyBinding keyBinding : keyBindings) {
+            ClientRegistry.registerKeyBinding(keyBinding);
+        }
     }
 }

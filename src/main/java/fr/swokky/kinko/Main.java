@@ -33,6 +33,7 @@ public class Main {
     @Mod.EventHandler
     public static void Init(FMLInitializationEvent e) {
         RegistryHandler.initRegistries();
+        proxy.init();
     }
     @Mod.EventHandler
     public static void postInit(FMLPostInitializationEvent e) {

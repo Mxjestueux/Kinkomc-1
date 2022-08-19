@@ -9,4 +9,5 @@ public class CommonProxy {
     public void registerEntityRenderer(){}
     public void registerGuis(){}
     public void preInit(){}
+    public void init(){}
 }
