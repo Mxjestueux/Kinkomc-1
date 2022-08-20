@@ -1,9 +1,14 @@
 package fr.swokky.kinko.proxy;
 
+import fr.swokky.kinko.capabilities.nomi.INoMi;
+import fr.swokky.kinko.capabilities.nomi.NoMi;
+import fr.swokky.kinko.capabilities.nomi.NoMiStorage;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import org.lwjgl.input.Keyboard;
 

@@ -1,6 +1,9 @@
 package fr.swokky.kinko.item.fruit;
 
 import fr.swokky.kinko.Main;
+import fr.swokky.kinko.capabilities.nomi.INoMi;
+import fr.swokky.kinko.capabilities.nomi.NoMi;
+import fr.swokky.kinko.capabilities.nomi.NoMiStorage;
 import fr.swokky.kinko.init.ItemInit;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,6 +15,8 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
+import java.util.Objects;
+
 public class GomuNoMi extends BaseFruit {
 
     public GomuNoMi(String name)
@@ -19,6 +24,7 @@ public class GomuNoMi extends BaseFruit {
         super(name,4,1.2F,false);
         this.setAlwaysEdible();
     }
+
 
     @Override
     public void registerModels() {
@@ -30,20 +36,12 @@ public class GomuNoMi extends BaseFruit {
     protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer player) {
         if(!worldIn.isRemote)
         {
-            NBTTagCompound tag = player.getEntityData();
-            NBTBase modeTag = tag.getTag("no_mi");
-            Database db = Databases.getDatabase("votre_database");
-            System.out.println(tag);
-            if(modeTag != null){
-                ITextComponent component = new TextComponentString("Vous êtes déjà le possesseur du " + modeTag.toString().split("\"")[1] + " no mi");
-                player.sendMessage(component);
-                worldIn.spawnEntity(new EntityItem(worldIn, player.posX, player.posY + 1, player.posZ, new ItemStack(ItemInit.GOMU_NO_MI)));
+            if(player.hasCapability(NoMiStorage.NO_MI_CAPABILITY, null) && player.getCapability(NoMiStorage.NO_MI_CAPABILITY, null) != null){
+                player.setHealth(0);
             } else {
-                MinecraftServer server = worldIn.getMinecraftServer();
-                ITextComponent component = new TextComponentString(player.getName() + " est maintenant le possesseur du fruit du gum gum");
-                server.getPlayerList().sendMessage(component);
-                tag.setString("no_mi", "gomu");
+                player.getCapability(NoMiStorage.NO_MI_CAPABILITY, null).setNoMi("gomu");
             }
+
         }
         super.onFoodEaten(stack,worldIn,player);
     }
