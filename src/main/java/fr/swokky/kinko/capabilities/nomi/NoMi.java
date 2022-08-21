@@ -1,7 +1,7 @@
 package fr.swokky.kinko.capabilities.nomi;
 
 public class NoMi implements INoMi{
-    private String noMi = "aaa";
+    private String noMi = "";
 
     @Override
     public void setNoMi(String noMi) {

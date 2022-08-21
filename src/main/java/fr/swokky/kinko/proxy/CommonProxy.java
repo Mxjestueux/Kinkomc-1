@@ -5,6 +5,7 @@ import fr.swokky.kinko.capabilities.nomi.NoMi;
 import fr.swokky.kinko.capabilities.nomi.NoMiStorage;
 import fr.swokky.kinko.utils.handlers.CapabilityHandler;
 import net.minecraft.item.Item;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 
 public class CommonProxy {
@@ -16,5 +17,6 @@ public class CommonProxy {
     public void preInit(){}
     public void init(){
         CapabilityManager.INSTANCE.register(INoMi.class, new NoMiStorage(), NoMi::new);
+        MinecraftForge.EVENT_BUS.register(new CapabilityHandler());
     }
 }
