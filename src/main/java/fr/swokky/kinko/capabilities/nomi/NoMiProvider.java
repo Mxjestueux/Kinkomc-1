@@ -3,31 +3,37 @@ package fr.swokky.kinko.capabilities.nomi;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
-public class NoMiProvider implements ICapabilitySerializable {
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
-    protected INoMi noMi;
+public class NoMiProvider implements ICapabilitySerializable<NBTBase> {
+
+    @CapabilityInject(INoMi.class)
+    public static final Capability<INoMi> NO_MI_CAPABILITY = null;
+
+    private INoMi instance = NO_MI_CAPABILITY.getDefaultInstance();
 
     @Override
-    public boolean hasCapability(Capability capability, EnumFacing facing) {
-        return capability == NoMiStorage.NO_MI_CAPABILITY;
+    public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
+        return capability == NO_MI_CAPABILITY;
     }
 
+    @Nullable
     @Override
-    public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
-        return this.hasCapability(capability, facing) ? NoMiStorage.NO_MI_CAPABILITY.cast(this.noMi) : null;
+    public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
+        return capability == NO_MI_CAPABILITY ? NO_MI_CAPABILITY.<T> cast(this.instance) : null;
     }
-
 
     @Override
     public NBTBase serializeNBT() {
-        return NoMiStorage.NO_MI_CAPABILITY.writeNBT(this.noMi, null);
+        return NO_MI_CAPABILITY.getStorage().writeNBT(NO_MI_CAPABILITY, this.instance, null);
     }
 
     @Override
     public void deserializeNBT(NBTBase nbt) {
-        NoMiStorage.NO_MI_CAPABILITY.readNBT(this.noMi, null, nbt);
+        NO_MI_CAPABILITY.getStorage().readNBT(NO_MI_CAPABILITY, this.instance, null, nbt);
     }
-
 }

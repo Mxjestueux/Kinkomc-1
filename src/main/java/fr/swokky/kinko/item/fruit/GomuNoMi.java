@@ -2,20 +2,11 @@ package fr.swokky.kinko.item.fruit;
 
 import fr.swokky.kinko.Main;
 import fr.swokky.kinko.capabilities.nomi.INoMi;
-import fr.swokky.kinko.capabilities.nomi.NoMi;
-import fr.swokky.kinko.capabilities.nomi.NoMiStorage;
-import fr.swokky.kinko.init.ItemInit;
-import net.minecraft.entity.item.EntityItem;
+import fr.swokky.kinko.capabilities.nomi.NoMiProvider;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
-
-import java.util.Objects;
+import org.lwjgl.Sys;
 
 public class GomuNoMi extends BaseFruit {
 
@@ -34,15 +25,12 @@ public class GomuNoMi extends BaseFruit {
 
     @Override
     protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer player) {
-        if(!worldIn.isRemote)
-        {
-            if(player.hasCapability(NoMiStorage.NO_MI_CAPABILITY, null) && player.getCapability(NoMiStorage.NO_MI_CAPABILITY, null) != null){
-                player.setHealth(0);
-            } else {
-                player.getCapability(NoMiStorage.NO_MI_CAPABILITY, null).setNoMi("gomu");
-            }
+        if(worldIn.isRemote) return;
 
-        }
+        INoMi nomi = player.getCapability(NoMiProvider.NO_MI_CAPABILITY, null);
+
+        System.out.println(nomi);
+
         super.onFoodEaten(stack,worldIn,player);
     }
 }

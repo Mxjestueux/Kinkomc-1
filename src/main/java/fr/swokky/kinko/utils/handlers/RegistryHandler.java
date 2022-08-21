@@ -1,6 +1,5 @@
 package fr.swokky.kinko.utils.handlers;
 
-import fr.swokky.kinko.capabilities.nomi.NoMiProvider;
 import fr.swokky.kinko.init.ItemInit;
 import fr.swokky.kinko.packet.ActionAttackPacket;
 import fr.swokky.kinko.proxy.ClientProxy;
@@ -8,6 +7,7 @@ import fr.swokky.kinko.utils.References;
 import fr.swokky.kinko.utils.interfaces.IHasModel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
@@ -58,11 +58,6 @@ public class RegistryHandler {
             System.out.println(player.getDisplayName());
             network.sendToServer(new ActionAttackPacket("Action1/"));
         }
-    }
-
-    @SubscribeEvent
-    public static void attachCapability(AttachCapabilitiesEvent <EntityPlayer> event){
-        event.addCapability(CAPABILITY_LOCATION, new NoMiProvider());
     }
 
     public static void preInitRegistries()
