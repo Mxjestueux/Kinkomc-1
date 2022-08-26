@@ -1,0 +1,9 @@
+{
+  "gear_second": {
+    "category" : "player",
+    "sounds": [{
+      "name": "kinko:gomunomi/gear_second",
+      "stream": true
+    }]
+  }
+}

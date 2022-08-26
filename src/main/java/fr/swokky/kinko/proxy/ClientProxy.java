@@ -1,14 +1,13 @@
 package fr.swokky.kinko.proxy;
 
-import fr.swokky.kinko.capabilities.nomi.INoMi;
-import fr.swokky.kinko.capabilities.nomi.NoMi;
-import fr.swokky.kinko.capabilities.nomi.NoMiStorage;
+import fr.swokky.kinko.entities.projectiles.gomu.GomuNoPistol;
+import fr.swokky.kinko.entities.projectiles.gomu.render.RenderGomuNoPistolFactory;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import org.lwjgl.input.Keyboard;
 
 public class ClientProxy extends CommonProxy{
@@ -28,6 +27,7 @@ public class ClientProxy extends CommonProxy{
     @Override
     public void registerEntityRenderer() {
         super.registerEntityRenderer();
+        RenderingRegistry.registerEntityRenderingHandler(GomuNoPistol.class, RenderGomuNoPistolFactory.INSTANCE);
     }
 
     @Override
@@ -41,9 +41,10 @@ public class ClientProxy extends CommonProxy{
 
     @Override
     public void init() {
-        keyBindings = new KeyBinding[1];
+        keyBindings = new KeyBinding[2];
 
         keyBindings[0] = new KeyBinding("key.nomi.attack", Keyboard.KEY_H, "key.kinko.category");
+        keyBindings[1] = new KeyBinding("key.nomi.special", Keyboard.KEY_G, "key.kinko.category");
 
 
         for (KeyBinding keyBinding : keyBindings) {

@@ -5,10 +5,11 @@ import fr.swokky.kinko.capabilities.nomi.INoMi;
 import fr.swokky.kinko.capabilities.nomi.NoMiProvider;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
-import org.lwjgl.Sys;
 
 public class GomuNoMi extends BaseFruit {
 
@@ -39,6 +40,9 @@ public class GomuNoMi extends BaseFruit {
             nomi.setNoMi("gomu");
             String message = player.getDisplayNameString() + " est le nouveau possesseur du gomu no mi !";
             player.getServer().getPlayerList().sendMessage(new TextComponentString(message));
+            Minecraft minecraft = Minecraft.getMinecraft();
+            minecraft.effectRenderer.emitParticleAtEntity(player, EnumParticleTypes.TOTEM, 30);
+            minecraft.entityRenderer.displayItemActivation(new ItemStack(this));
         }
         super.onFoodEaten(stack,worldIn,player);
     }
