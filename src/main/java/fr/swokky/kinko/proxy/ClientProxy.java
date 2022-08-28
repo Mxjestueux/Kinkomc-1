@@ -41,10 +41,11 @@ public class ClientProxy extends CommonProxy{
 
     @Override
     public void init() {
-        keyBindings = new KeyBinding[2];
+        keyBindings = new KeyBinding[3];
 
         keyBindings[0] = new KeyBinding("key.nomi.attack", Keyboard.KEY_H, "key.kinko.category");
-        keyBindings[1] = new KeyBinding("key.nomi.special", Keyboard.KEY_G, "key.kinko.category");
+        keyBindings[1] = new KeyBinding("key.nomi.special", Keyboard.KEY_J, "key.kinko.category");
+        keyBindings[2] = new KeyBinding("key.nomi.special_second", Keyboard.KEY_Q, "key.kinko.category");
 
 
         for (KeyBinding keyBinding : keyBindings) {

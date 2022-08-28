@@ -1,17 +1,19 @@
 package fr.swokky.kinko.utils.handlers;
 
 import fr.swokky.kinko.Main;
+import fr.swokky.kinko.capabilities.nomi.NoMiProvider;
 import fr.swokky.kinko.init.EntityInit;
 import fr.swokky.kinko.init.ItemInit;
 import fr.swokky.kinko.network.PacketActionNoMiMessage;
 import fr.swokky.kinko.proxy.ClientProxy;
 import fr.swokky.kinko.utils.interfaces.IHasModel;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.util.DamageSource;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -36,6 +38,23 @@ public class RegistryHandler {
         }
     }
 
+    @SubscribeEvent
+    public static void onHurt(LivingHurtEvent event){
+        if(!(event.getEntity() instanceof EntityPlayer)) return;
+        EntityPlayer player = (EntityPlayer) event.getEntity();
+        float damage = event.getAmount();
+        DamageSource source = event.getSource();
+        String noMi = player.getCapability(NoMiProvider.NO_MI_CAPABILITY, null).getNoMi();
+        switch (noMi){
+            case "gomu":
+                if(source.isProjectile()){
+                    event.setCanceled(true);
+                    player.attackEntityFrom(source, Math.round(0.8*damage));
+                }
+            default:
+        }
+    }
+
 
     @SideOnly(Side.CLIENT)
     @SubscribeEvent(priority = EventPriority.NORMAL, receiveCanceled = true)
@@ -49,6 +68,9 @@ public class RegistryHandler {
         if(keyBindings[1].isPressed()){
             Main.network.sendToServer(new PacketActionNoMiMessage("Special"));
         }
+        if(keyBindings[2].isPressed()){
+            Main.network.sendToServer(new PacketActionNoMiMessage("Special_Second"));
+        }
     }
 
     public static void preInitRegistries()
@@ -58,5 +80,6 @@ public class RegistryHandler {
 
     public static void initRegistries()
     {
+        SoundsHandler.registerSounds();
     }
 }
