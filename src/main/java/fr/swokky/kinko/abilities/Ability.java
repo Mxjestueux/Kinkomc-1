@@ -1,17 +1,13 @@
 package fr.swokky.kinko.abilities;
 
 
-import fr.swokky.kinko.utils.api.Config;
 import fr.swokky.kinko.utils.api.Config.AbilityCategory;
 import fr.swokky.kinko.utils.api.Config.AbilityType;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraftforge.registries.IForgeRegistryEntry;
 
 public class Ability{
 
-    private String name = "";
-    private String description = "";
+    private final String name;
     protected double cooldown;
     protected double maxCooldown;
 
@@ -24,7 +20,7 @@ public class Ability{
         this.category = category;
     }
 
-    public void onUse(EntityPlayer player, Boolean isOnCooldown, AbilityType type) throws InterruptedException {
+    public void onUse(EntityPlayer player, Boolean isOnCooldown, AbilityType type){
     }
 
     public boolean isOnCooldown(EntityPlayer player){
@@ -35,7 +31,7 @@ public class Ability{
         this.type = type;
     }
 
-    public AbilityType getType() {
-        return type;
+    public String getName(){
+        return this.name;
     }
 }

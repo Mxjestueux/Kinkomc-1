@@ -1,17 +1,25 @@
 package fr.swokky.kinko.utils.api;
 
-public class Config
-{
+public class Config {
 
-    public static enum AbilityCategory{
+    public static enum AbilityCategory {
         ALL,
         DEVIL,
         HAKI,
     }
-    public static enum AbilityType{
+
+    public static enum AbilityType {
         COOLDOWN,
-        PASSIVE,
-        CHARGING,
         DISABLED
     }
+
+    public static enum DevilType{
+        PARAMECIA_SPECIAL,
+        PARAMECIA,
+        ZOAN_SPECIAL,
+        ZOAN,
+        LOGIA
+    }
+
+
 }

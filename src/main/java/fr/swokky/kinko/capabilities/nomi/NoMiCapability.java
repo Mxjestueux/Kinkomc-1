@@ -1,6 +1,6 @@
 package fr.swokky.kinko.capabilities.nomi;
 
-public class NoMi implements INoMi{
+public class NoMiCapability implements INoMiCapability {
     private String noMi = "";
 
     @Override
@@ -12,4 +12,5 @@ public class NoMi implements INoMi{
     public String getNoMi() {
         return this.noMi;
     }
+
 }

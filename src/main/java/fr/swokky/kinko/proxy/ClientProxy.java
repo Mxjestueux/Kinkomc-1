@@ -1,7 +1,9 @@
 package fr.swokky.kinko.proxy;
 
 import fr.swokky.kinko.entities.projectiles.gomu.GomuNoPistol;
+import fr.swokky.kinko.entities.projectiles.gomu.GomuNoPistolThird;
 import fr.swokky.kinko.entities.projectiles.gomu.render.RenderGomuNoPistolFactory;
+import fr.swokky.kinko.entities.projectiles.gomu.render.RenderGomuNoPistolThirdFactory;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.item.Item;
@@ -28,10 +30,12 @@ public class ClientProxy extends CommonProxy{
     public void registerEntityRenderer() {
         super.registerEntityRenderer();
         RenderingRegistry.registerEntityRenderingHandler(GomuNoPistol.class, RenderGomuNoPistolFactory.INSTANCE);
+        RenderingRegistry.registerEntityRenderingHandler(GomuNoPistolThird.class, RenderGomuNoPistolThirdFactory.INSTANCE);
     }
 
     @Override
     public void registerGuis() {
+
     }
 
     @Override
@@ -41,11 +45,12 @@ public class ClientProxy extends CommonProxy{
 
     @Override
     public void init() {
-        keyBindings = new KeyBinding[3];
+        keyBindings = new KeyBinding[4];
 
         keyBindings[0] = new KeyBinding("key.nomi.attack", Keyboard.KEY_H, "key.kinko.category");
         keyBindings[1] = new KeyBinding("key.nomi.special", Keyboard.KEY_J, "key.kinko.category");
-        keyBindings[2] = new KeyBinding("key.nomi.special_second", Keyboard.KEY_Q, "key.kinko.category");
+        keyBindings[2] = new KeyBinding("key.nomi.special_second", Keyboard.KEY_G, "key.kinko.category");
+        keyBindings[3] = new KeyBinding("key.nomi.special_third", Keyboard.KEY_K, "key.kinko.category");
 
 
         for (KeyBinding keyBinding : keyBindings) {

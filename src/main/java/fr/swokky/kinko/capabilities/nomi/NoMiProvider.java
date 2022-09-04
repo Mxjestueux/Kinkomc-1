@@ -11,10 +11,10 @@ import javax.annotation.Nullable;
 
 public class NoMiProvider implements ICapabilitySerializable<NBTBase> {
 
-    @CapabilityInject(INoMi.class)
-    public static final Capability<INoMi> NO_MI_CAPABILITY = null;
+    @CapabilityInject(INoMiCapability.class)
+    public static final Capability<INoMiCapability> NO_MI_CAPABILITY = null;
 
-    private INoMi instance = NO_MI_CAPABILITY.getDefaultInstance();
+    private INoMiCapability instance = NO_MI_CAPABILITY.getDefaultInstance();
 
     @Override
     public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {

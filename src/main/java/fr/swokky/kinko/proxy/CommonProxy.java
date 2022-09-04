@@ -1,7 +1,7 @@
 package fr.swokky.kinko.proxy;
 
-import fr.swokky.kinko.capabilities.nomi.INoMi;
-import fr.swokky.kinko.capabilities.nomi.NoMi;
+import fr.swokky.kinko.capabilities.nomi.INoMiCapability;
+import fr.swokky.kinko.capabilities.nomi.NoMiCapability;
 import fr.swokky.kinko.capabilities.nomi.NoMiStorage;
 import fr.swokky.kinko.utils.handlers.CapabilityHandler;
 import net.minecraft.item.Item;
@@ -16,7 +16,7 @@ public class CommonProxy {
     public void registerGuis(){}
     public void preInit(){}
     public void init(){
-        CapabilityManager.INSTANCE.register(INoMi.class, new NoMiStorage(), NoMi::new);
+        CapabilityManager.INSTANCE.register(INoMiCapability.class, new NoMiStorage(), NoMiCapability::new);
         MinecraftForge.EVENT_BUS.register(new CapabilityHandler());
     }
 }
