@@ -2,6 +2,7 @@ package fr.swokky.kinko.abilities.gomunomi;
 
 import fr.swokky.kinko.Main;
 import fr.swokky.kinko.abilities.CooldownAbility;
+import fr.swokky.kinko.abilities.ThrowableAbility;
 import fr.swokky.kinko.init.PotionInit;
 import fr.swokky.kinko.utils.api.Config;
 import fr.swokky.kinko.utils.handlers.SoundsHandler;
@@ -16,7 +17,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class GomuNoGearSecondAbility extends CooldownAbility {
+public class GomuNoGearSecondAbility extends ThrowableAbility {
 
     private final int maxCD = 300000;
 
@@ -58,7 +59,8 @@ public class GomuNoGearSecondAbility extends CooldownAbility {
         CooldownHashMap.addElement(player, new Date().getTime() ,CooldownHashMap.thirdAbilityCD);
     }
 
-    private int getCooldown(EntityPlayer player){
+    @Override
+    public int getCooldown(EntityPlayer player){
         return CooldownHashMap.getCooldown(player,CooldownHashMap.thirdAbilityCD,maxCD);
     }
 }

@@ -15,7 +15,9 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
 import java.util.Map;
+import java.util.Objects;
 
 public abstract class BaseFruit extends ItemFood {
 
@@ -41,24 +43,23 @@ public abstract class BaseFruit extends ItemFood {
     }
 
     @Override
-    protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer player) {
+    protected void onFoodEaten(@Nonnull ItemStack stack, World worldIn, @Nonnull EntityPlayer player) {
         if (worldIn.isRemote) return;
 
-        INoMiCapability nomi = player.getCapability(NoMiProvider.NO_MI_CAPABILITY, null);
+        String noMi = DevilFruitHashMap.devilFruit.get(player.getUniqueID());
 
-        assert nomi != null;
-        if (nomi.getNoMi().isEmpty()) {
-            nomi.setNoMi(this.registry_name);
+        if (noMi == null) {
             DevilFruitHashMap.devilFruit.put(player.getUniqueID(), this.registry_name);
-            StringBuilder message = new StringBuilder().append(player.getDisplayNameString()).append(" est le nouveau possesseur du ").append(this.name);
-            player.getServer().getPlayerList().sendMessage(new TextComponentString(message.toString()));
+            player.getCapability(NoMiProvider.NO_MI_CAPABILITY, null).setNoMi(this.registry_name);
+            Objects.requireNonNull(player.getServer()).getPlayerList().sendMessage(new TextComponentString(player.getDisplayNameString() + " est le nouveau possesseur du " + this.name));
             Minecraft minecraft = Minecraft.getMinecraft();
             minecraft.effectRenderer.emitParticleAtEntity(player, EnumParticleTypes.TOTEM, 30);
             minecraft.entityRenderer.displayItemActivation(new ItemStack(this));
         } else {
             player.setHealth(0);
-            String message = player.getDisplayNameString() + " a essayé de manger un deuxième fruit du démon ! Il n'est plus le possesseur du " + nomi.getNoMi() + " et du "+ this.name;
-            player.getServer().getPlayerList().sendMessage(new TextComponentString(message));
+            String message = player.getDisplayNameString() + " a essayé de manger un deuxième fruit du démon ! Il n'est plus le possesseur du " + noMi + " et du "+ this.name;
+            Objects.requireNonNull(player.getServer()).getPlayerList().sendMessage(new TextComponentString(message));
+            DevilFruitHashMap.devilFruit.remove(player.getUniqueID());
         }
         super.onFoodEaten(stack, worldIn, player);
     }

@@ -17,6 +17,7 @@ public class FruitManager {
 
     private void registerFruits(){
         registerFruit("gomugomunomi", GomuNoMi.class);
+        registerFruit("merameranomi", MeraNoMi.class);
     }
 
     private void registerFruit(String key, Class<? extends BaseFruit> fruit){

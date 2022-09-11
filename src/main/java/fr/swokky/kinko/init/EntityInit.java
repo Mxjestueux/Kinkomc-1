@@ -3,6 +3,8 @@ package fr.swokky.kinko.init;
 import fr.swokky.kinko.Main;
 import fr.swokky.kinko.entities.projectiles.gomu.GomuNoPistol;
 import fr.swokky.kinko.entities.projectiles.gomu.GomuNoPistolThird;
+import fr.swokky.kinko.entities.projectiles.mera.Higan;
+import fr.swokky.kinko.entities.projectiles.mera.Kagero;
 import fr.swokky.kinko.utils.References;
 import fr.swokky.kinko.utils.handlers.ConfigHandler;
 import net.minecraft.entity.Entity;
@@ -15,6 +17,8 @@ public class EntityInit {
     {
         registerProjectiles("GomuNoPistolAbility", ConfigHandler.ENTITY_GOMU_PISTOL, GomuNoPistol.class);
         registerProjectiles("GomuNoPistolThirdAbility", ConfigHandler.ENTITY_GOMU_PISTOL_THIRD, GomuNoPistolThird.class);
+        registerProjectiles("Higan", ConfigHandler.ENTITY_HIGAN, Higan.class);
+        registerProjectiles("Kagero", ConfigHandler.ENTITY_KAGERO, Kagero.class);
     }
 
     private static void registerProjectiles(String name, int id, Class<? extends Entity> entity)

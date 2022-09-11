@@ -1,6 +1,4 @@
-package fr.swokky.kinko.entities.projectiles.gomu.render;// Made with Blockbench 4.3.1
-// Exported for Minecraft version 1.7 - 1.12
-// Paste this class into your mod and generate all required imports
+package fr.swokky.kinko.entities.projectiles.gomu.render;
 
 
 import net.minecraft.client.model.ModelBase;

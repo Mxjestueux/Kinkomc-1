@@ -10,4 +10,5 @@ public class ItemInit {
     public static List<Item> ITEMS = new ArrayList<>();
 
     public static final Item GOMU_NO_MI = new GomuNoMi("gomugomunomi");
+    public static final Item MERA_NO_MI = new GomuNoMi("merameranomi");
 }

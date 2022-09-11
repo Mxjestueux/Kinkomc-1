@@ -54,7 +54,8 @@ public class GomuNoGearThirdAbility extends CooldownAbility {
         CooldownHashMap.addElement(player, new Date().getTime() ,CooldownHashMap.fourthAbilityCD);
     }
 
-    private int getCooldown(EntityPlayer player){
+    @Override
+    public int getCooldown(EntityPlayer player){
         return CooldownHashMap.getCooldown(player, CooldownHashMap.fourthAbilityCD,maxCD);
     }
 }

@@ -1,5 +1,6 @@
 package fr.swokky.kinko;
 
+import fr.swokky.kinko.client.AbilityHudOverlay;
 import fr.swokky.kinko.network.PacketActionNoMiMessage;
 import fr.swokky.kinko.proxy.CommonProxy;
 import fr.swokky.kinko.utils.References;

@@ -21,6 +21,7 @@ public class GomuNoPistol extends AbilityProjectilesEntity {
         super(worldIn,x,y,z);
         this.setDamage(5);
     }
+
     @Override
     public void onUpdate()
     {

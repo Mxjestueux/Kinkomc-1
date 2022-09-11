@@ -6,7 +6,9 @@ import fr.swokky.kinko.capabilities.nomi.NoMiProvider;
 import fr.swokky.kinko.item.fruit.BaseFruit;
 import fr.swokky.kinko.item.fruit.FruitManager;
 import fr.swokky.kinko.utils.api.Config;
+import fr.swokky.kinko.utils.hashmap.DevilFruitHashMap;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
@@ -44,12 +46,13 @@ public class PacketActionNoMiMessage implements IMessage {
         @Override
         public IMessage onMessage(PacketActionNoMiMessage message, MessageContext ctx) {
             EntityPlayerMP player = ctx.getServerHandler().player;
-            INoMiCapability noMi = player.getCapability(NoMiProvider.NO_MI_CAPABILITY, null);
-            if (noMi.getNoMi().equals("")) return null;
-            Class<? extends BaseFruit> fruit = FruitManager.getInstance().getFruit(noMi.getNoMi());
+            if(player.isInsideOfMaterial(Material.WATER)) return null;
+            String noMi = DevilFruitHashMap.devilFruit.get(player.getUniqueID());
+            if (noMi == null) return null;
+            Class<? extends BaseFruit> fruit = FruitManager.getInstance().getFruit(noMi);
             try {
                 Constructor<? extends BaseFruit> constructorFruit = fruit.getDeclaredConstructor(String.class);
-                Class<? extends Ability> ability = constructorFruit.newInstance(noMi.getNoMi()).getAbility(message.text);
+                Class<? extends Ability> ability = constructorFruit.newInstance(noMi).getAbility(message.text);
                 Constructor<? extends Ability> constructorAbility = ability.getDeclaredConstructor(EntityPlayer.class);
                 constructorAbility.newInstance(player);
             } catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {

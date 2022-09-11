@@ -1,7 +1,7 @@
 package fr.swokky.kinko.abilities.gomunomi;
 
-import fr.swokky.kinko.Main;
 import fr.swokky.kinko.abilities.CooldownAbility;
+import fr.swokky.kinko.abilities.ThrowableAbility;
 import fr.swokky.kinko.entities.projectiles.AbilityProjectilesEntity;
 import fr.swokky.kinko.entities.projectiles.gomu.GomuNoPistol;
 import fr.swokky.kinko.entities.projectiles.gomu.GomuNoPistolThird;
@@ -15,11 +15,10 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextComponentString;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class GomuNoGatlingAbility extends CooldownAbility {
+public class GomuNoGatlingAbility extends ThrowableAbility {
 
     private final int maxCD = 60000;
 
@@ -30,15 +29,8 @@ public class GomuNoGatlingAbility extends CooldownAbility {
 
     @Override
     public void onUse(EntityPlayer player, Boolean isOnCooldown, Config.AbilityType type) {
-        if (player.world.isRemote) return;
-        if (isOnCooldown) {
-            player.sendMessage(new TextComponentString("This ability is on cooldown of " + getCooldown(player) + "seconds"));
-            return;
-        }
+        if(!(checkWorld(player, isOnCooldown, type))) return;
         Vec3d look = player.getLookVec();
-        BlockPos pos = new BlockPos(player.posX + look.x, player.posY + 1 + look.y, player.posZ + look.z);
-        if (player.world.getBlockState(pos).getBlock() != Block.getBlockById(0)) return;
-        if (type == Config.AbilityType.DISABLED) return;
         entitySpawn(player,look);
         add(player);
         new Timer().schedule(new TimerTask() {
@@ -50,23 +42,23 @@ public class GomuNoGatlingAbility extends CooldownAbility {
     }
 
     private void entitySpawn(EntityPlayer player, Vec3d look){
-        for(int i=0;i<5;i++){
-            int randX = (getRandomNumberInRange(0, 3) - 2) / 2;
-            int randY = (getRandomNumberInRange(0, 3) - 2) / 2;
-            int randZ = (getRandomNumberInRange(0, 3) - 2) / 2;
-            AbilityProjectilesEntity entity = getEntity(player);
-            entity.setPosition(player.posX + look.x * 1.5D + randX, player.posY + 1D + look.y * 1.5D + randY, player.posZ + look.z * 1.5D + randZ);
-            entity.setNoGravity(true);
-            entity.shoot(player, player.rotationPitch, player.rotationYaw, 0, 1, 0);
-            entity.setDamage(getDamage(entity, player));
-            player.world.spawnEntity(entity);
-            try {
-                Thread.sleep(11);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        newTaskPeriodic(new TimerTask() {
+            @Override
+            public void run() {
+                int randX = (getRandomNumberInRange(0, 3) - 2) / 2;
+                int randY = (getRandomNumberInRange(0, 3) - 2) / 2;
+                int randZ = (getRandomNumberInRange(0, 3) - 2) / 2;
+                AbilityProjectilesEntity entity = getEntity(player);
+                entity.setPosition(player.posX + look.x * 1.5D + randX, player.posY + 1D + look.y * 1.5D + randY, player.posZ + look.z * 1.5D + randZ);
+                entity.setNoGravity(true);
+                entity.shoot(player, player.rotationPitch, player.rotationYaw, 0, 1, 0);
+                entity.setDamage(getDamage(entity, player));
+                player.world.spawnEntity(entity);
             }
-        }
+        },5,11);
     }
+
+
 
     @Override
     public boolean isOnCooldown(EntityPlayer player) {
@@ -81,7 +73,8 @@ public class GomuNoGatlingAbility extends CooldownAbility {
         CooldownHashMap.addElement(player, new Date().getTime() ,CooldownHashMap.secondAbilityCD);
     }
 
-    private int getCooldown(EntityPlayer player){
+    @Override
+    public int getCooldown(EntityPlayer player){
         return CooldownHashMap.getCooldown(player,CooldownHashMap.secondAbilityCD,maxCD);
     }
 
@@ -100,7 +93,7 @@ public class GomuNoGatlingAbility extends CooldownAbility {
 
     private int getDamage(AbilityProjectilesEntity entity, EntityPlayer player){
         if(entity instanceof GomuNoPistolThird){
-            return player.isPotionActive(PotionInit.GOMU_NO_GEAR_SECOND_EFFECT) ? 7 : 5;
+            return player.isPotionActive(PotionInit.GOMU_NO_GEAR_SECOND_EFFECT) ? 10 : 7;
         }
         return player.isPotionActive(PotionInit.GOMU_NO_GEAR_SECOND_EFFECT) ? 5 : 3;
     }

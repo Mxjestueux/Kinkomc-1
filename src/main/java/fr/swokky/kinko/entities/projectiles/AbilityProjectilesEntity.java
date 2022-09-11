@@ -27,15 +27,11 @@ public class AbilityProjectilesEntity extends EntityThrowable {
 
     @Override
     protected void onImpact(RayTraceResult result) {
-        if(!this.world.isRemote)
-        {
-            setDead();
-            if(result.entityHit instanceof EntityLivingBase)
-            {
-                EntityLivingBase entity = (EntityLivingBase) result.entityHit;
-                entity.attackEntityFrom(DamageSource.causeThrownDamage(this,this.thrower), damage);
-            }
-        }
+        if(this.world.isRemote) return;
+        setDead();
+        if(!(result.entityHit instanceof EntityLivingBase)) return;
+        EntityLivingBase entity = (EntityLivingBase) result.entityHit;
+        entity.attackEntityFrom(DamageSource.causeThrownDamage(this,this.thrower), damage);
     }
 
     public void setDamage(int damage)

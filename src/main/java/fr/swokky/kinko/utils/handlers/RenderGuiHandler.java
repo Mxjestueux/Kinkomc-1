@@ -15,6 +15,8 @@ public class RenderGuiHandler {
         if(event.getType() != RenderGameOverlayEvent.ElementType.TEXT) return;
         EntityPlayer player = Minecraft.getMinecraft().player;
 
-        new AbilityHudOverlay(Minecraft.getMinecraft());
+        if(!(DevilFruitHashMap.devilFruit.containsKey(player.getUniqueID()))) return;
+
+        new AbilityHudOverlay(Minecraft.getMinecraft(), DevilFruitHashMap.devilFruit.get(player.getUniqueID()));
     }
 }
