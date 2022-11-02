@@ -1,10 +1,8 @@
 package fr.swokky.kinko;
 
-import fr.swokky.kinko.client.AbilityHudOverlay;
 import fr.swokky.kinko.network.PacketActionNoMiMessage;
 import fr.swokky.kinko.proxy.CommonProxy;
 import fr.swokky.kinko.utils.References;
-import fr.swokky.kinko.utils.handlers.PlayerEventHandler;
 import fr.swokky.kinko.utils.handlers.RegistryHandler;
 import fr.swokky.kinko.utils.handlers.RenderGuiHandler;
 import net.minecraftforge.common.MinecraftForge;

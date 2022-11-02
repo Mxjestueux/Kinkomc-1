@@ -17,7 +17,18 @@ public class ThrowableAbility extends CooldownAbility{
         super(name, category);
     }
 
+    public void newTaskPeriodic(TimerTask task, long repetition, long delay){
+        Timer timer = new Timer(true);
+        timer.scheduleAtFixedRate(task,0,delay);
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                timer.cancel();
+            }
+        }, repetition*delay);
+    }
 
+    @Override
     public boolean checkWorld(EntityPlayer player, Boolean isOnCooldown, Config.AbilityType type) {
         if (player.world.isRemote) return false;
         if (isOnCooldown) {
@@ -28,16 +39,5 @@ public class ThrowableAbility extends CooldownAbility{
         BlockPos pos = new BlockPos(player.posX + look.x, player.posY + 1 + look.y, player.posZ + look.z);
         if (player.world.getBlockState(pos).getBlock() != Block.getBlockById(0)) return false;
         return type != Config.AbilityType.DISABLED;
-    }
-
-    public void newTaskPeriodic(TimerTask task, long repetition, long delay){
-        Timer timer = new Timer(true);
-        timer.scheduleAtFixedRate(task,0,delay);
-        new Timer().schedule(new TimerTask() {
-            @Override
-            public void run() {
-                timer.cancel();
-            }
-        }, repetition*delay);
     }
 }

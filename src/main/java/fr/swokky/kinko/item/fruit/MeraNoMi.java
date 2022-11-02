@@ -2,11 +2,10 @@ package fr.swokky.kinko.item.fruit;
 
 import fr.swokky.kinko.Main;
 import fr.swokky.kinko.abilities.Ability;
-import fr.swokky.kinko.abilities.gomunomi.GomuNoGatlingAbility;
-import fr.swokky.kinko.abilities.gomunomi.GomuNoGearSecondAbility;
 import fr.swokky.kinko.abilities.gomunomi.GomuNoGearThirdAbility;
-import fr.swokky.kinko.abilities.gomunomi.GomuNoPistolAbility;
+import fr.swokky.kinko.abilities.merameranomi.FlameCallAbility;
 import fr.swokky.kinko.abilities.merameranomi.HiganAbility;
+import fr.swokky.kinko.abilities.merameranomi.HikenAbility;
 import fr.swokky.kinko.abilities.merameranomi.KageroAbility;
 import fr.swokky.kinko.utils.api.Config;
 import fr.swokky.kinko.utils.interfaces.IHasModel;
@@ -41,8 +40,8 @@ public class MeraNoMi extends BaseFruit implements IHasModel {
         final Map<String, Class<? extends Ability>> abilities = new HashMap<>();
         abilities.put("Attack", HiganAbility.class);
         abilities.put("Special", KageroAbility.class);
-        abilities.put("Special_Second", GomuNoGearSecondAbility.class);
-        abilities.put("Special_Third", GomuNoGearThirdAbility.class);
+        abilities.put("Special_Second", HikenAbility.class);
+        abilities.put("Special_Third", FlameCallAbility.class);
         return abilities;
     }
 }

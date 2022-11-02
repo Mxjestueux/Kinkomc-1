@@ -1,6 +1,6 @@
 package fr.swokky.kinko.entities.projectiles.mera.render;
 
-import fr.swokky.kinko.entities.projectiles.mera.Kagero;
+import fr.swokky.kinko.entities.projectiles.mera.FlameBoom;
 import fr.swokky.kinko.utils.References;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -10,23 +10,23 @@ import javax.annotation.Nullable;
 
 import static org.lwjgl.opengl.GL11.*;
 
-public class RenderKagero extends Render<Kagero> {
+public class RenderFlameBoom extends Render<FlameBoom> {
 
-    private static final ResourceLocation TEXTURES = new ResourceLocation(References.MODID + ":textures/entity/kagero.png");
-    private HiganModel model = new HiganModel();
+    private static final ResourceLocation TEXTURES = new ResourceLocation(References.MODID + ":textures/entity/flame_boom.png");
+    private FlameBoomModel model = new FlameBoomModel();
 
-    protected RenderKagero(RenderManager renderManager) {
+    protected RenderFlameBoom(RenderManager renderManager) {
         super(renderManager);
     }
 
     @Nullable
     @Override
-    protected ResourceLocation getEntityTexture(Kagero entity) {
+    protected ResourceLocation getEntityTexture(FlameBoom entity) {
         return TEXTURES;
     }
 
     @Override
-    public void doRender(Kagero entity, double x, double y, double z, float entityYaw, float partialTicks) {
+    public void doRender(FlameBoom entity, double x, double y, double z, float entityYaw, float partialTicks) {
         glPushMatrix();
         bindTexture(TEXTURES);
         glTranslated(x, y, z);

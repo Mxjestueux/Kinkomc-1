@@ -9,11 +9,13 @@ import fr.swokky.kinko.proxy.ClientProxy;
 import fr.swokky.kinko.utils.hashmap.DevilFruitHashMap;
 import fr.swokky.kinko.utils.interfaces.IHasModel;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -44,16 +46,18 @@ public class RegistryHandler {
 
     @SubscribeEvent
     public static void onHurt(LivingHurtEvent event) {
+
         if (!(event.getEntity() instanceof EntityPlayer)) return;
         EntityPlayer player = (EntityPlayer) event.getEntity();
         float damage = event.getAmount();
+
         DamageSource source = event.getSource();
         String noMi = DevilFruitHashMap.devilFruit.get(player.getUniqueID());
-        if (noMi.equals("GomuGomuNoMi")) {
-            if (source.isProjectile()) {
-                event.setCanceled(true);
-                player.attackEntityFrom(source, Math.round(0.8 * damage));
-            }
+
+        if (noMi.equals("GomuGomuNoMi") && source.isProjectile()) {
+            event.setCanceled(true);
+            player.attackEntityFrom(source, Math.round(0.8 * damage));
+
         }
     }
 

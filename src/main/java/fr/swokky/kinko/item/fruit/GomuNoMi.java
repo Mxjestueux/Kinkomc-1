@@ -6,10 +6,8 @@ import fr.swokky.kinko.abilities.gomunomi.GomuNoGatlingAbility;
 import fr.swokky.kinko.abilities.gomunomi.GomuNoGearSecondAbility;
 import fr.swokky.kinko.abilities.gomunomi.GomuNoGearThirdAbility;
 import fr.swokky.kinko.abilities.gomunomi.GomuNoPistolAbility;
-import fr.swokky.kinko.client.AbilityHudOverlay;
 import fr.swokky.kinko.utils.api.Config;
 import fr.swokky.kinko.utils.interfaces.IHasModel;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -28,7 +26,7 @@ public class GomuNoMi extends BaseFruit implements IHasModel {
 
     @Override
     public void registerModels() {
-        Main.proxy.registerItemRenderer(this,0);
+        Main.proxy.registerItemRenderer(this, 0);
     }
 
     @Override

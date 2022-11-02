@@ -1,6 +1,7 @@
 package fr.swokky.kinko.entities.projectiles.mera.render;
 
-import fr.swokky.kinko.entities.projectiles.mera.Kagero;
+import fr.swokky.kinko.entities.projectiles.mera.Higan;
+import fr.swokky.kinko.entities.projectiles.mera.Hiken;
 import fr.swokky.kinko.utils.References;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -10,23 +11,23 @@ import javax.annotation.Nullable;
 
 import static org.lwjgl.opengl.GL11.*;
 
-public class RenderKagero extends Render<Kagero> {
+public class RenderHiken extends Render<Hiken> {
 
-    private static final ResourceLocation TEXTURES = new ResourceLocation(References.MODID + ":textures/entity/kagero.png");
+    private static final ResourceLocation TEXTURES = new ResourceLocation(References.MODID + ":textures/entity/hiken.png");
     private HiganModel model = new HiganModel();
 
-    protected RenderKagero(RenderManager renderManager) {
+    protected RenderHiken(RenderManager renderManager) {
         super(renderManager);
     }
 
     @Nullable
     @Override
-    protected ResourceLocation getEntityTexture(Kagero entity) {
+    protected ResourceLocation getEntityTexture(Hiken entity) {
         return TEXTURES;
     }
 
     @Override
-    public void doRender(Kagero entity, double x, double y, double z, float entityYaw, float partialTicks) {
+    public void doRender(Hiken entity, double x, double y, double z, float entityYaw, float partialTicks) {
         glPushMatrix();
         bindTexture(TEXTURES);
         glTranslated(x, y, z);

@@ -5,8 +5,10 @@ import fr.swokky.kinko.entities.projectiles.gomu.GomuNoPistolThird;
 import fr.swokky.kinko.entities.projectiles.gomu.render.RenderGomuNoPistolFactory;
 import fr.swokky.kinko.entities.projectiles.gomu.render.RenderGomuNoPistolThirdFactory;
 import fr.swokky.kinko.entities.projectiles.mera.Higan;
+import fr.swokky.kinko.entities.projectiles.mera.Hiken;
 import fr.swokky.kinko.entities.projectiles.mera.Kagero;
 import fr.swokky.kinko.entities.projectiles.mera.render.RenderHiganFactory;
+import fr.swokky.kinko.entities.projectiles.mera.render.RenderHikenFactory;
 import fr.swokky.kinko.entities.projectiles.mera.render.RenderKageroFactory;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.settings.KeyBinding;
@@ -37,6 +39,7 @@ public class ClientProxy extends CommonProxy{
         RenderingRegistry.registerEntityRenderingHandler(GomuNoPistolThird.class, RenderGomuNoPistolThirdFactory.INSTANCE);
         RenderingRegistry.registerEntityRenderingHandler(Higan.class, RenderHiganFactory.INSTANCE);
         RenderingRegistry.registerEntityRenderingHandler(Kagero.class, RenderKageroFactory.INSTANCE);
+        RenderingRegistry.registerEntityRenderingHandler(Hiken.class, RenderHikenFactory.INSTANCE);
     }
 
     @Override

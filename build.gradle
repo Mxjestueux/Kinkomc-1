@@ -133,8 +133,3 @@ jar {
 jar.finalizedBy('reobfJar')
 
 jar { duplicatesStrategy(DuplicatesStrategy.EXCLUDE)}
-
-sourceSets {
-    main { output.resourcesDir = output.classesDirs.singleFile
-    }
-}
